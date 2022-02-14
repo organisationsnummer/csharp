@@ -82,9 +82,7 @@ namespace Organisationsnummer
         /// <summary>
         /// Get organisation VAT.
         /// </summary>
-        public string VatNumber => @$"SE{Format(false)
-            .Replace("+", "")
-            .Replace("-", "")}01";
+        public string VatNumber => @$"SE{ShortString}01";
 
         /// <summary>
         /// Determine is the organisationsnummer is a personnummer or not.
@@ -99,7 +97,7 @@ namespace Organisationsnummer
         /// <summary>
         /// Get type of company/firm.
         /// </summary>
-        public string GetType =>
+        public string Type =>
             IsPersonnummer
                 ? FirmaTypes[10]
                 : FirmaTypes[int.Parse(_number!.Substring(0, 1))];
@@ -122,13 +120,13 @@ namespace Organisationsnummer
         /// <returns></returns>
         public string Format(bool separator = true)
         {
-            if (IsPersonnummer)
-            {
-                return _personnummer!.Format(false);
-            }
-
-            return separator ? $"{_number!.AsSpan(0, 6)}-{_number!.AsSpan(6)}" : _number!;
+            var num = ShortString;
+            return separator ? $"{num!.AsSpan(0, 6)}-{num!.AsSpan(6)}" : num!;
         }
+
+        private string ShortString => ((IsPersonnummer ? _personnummer!.Format(false) : _number)!)
+                .Replace("-", "")
+                .Replace("+", "");
 
         private void InnerParse(string input)
         {
@@ -140,7 +138,8 @@ namespace Organisationsnummer
                     throw new OrganisationsnummerException();
                 }
 
-                input = input.Replace("-", "");
+                input = input.Replace("-", "")
+                             .Replace("+", "");
                 // Get regexp match
                 //var matches = regex.Matches(input);
                 var groups = matches[0].Groups;

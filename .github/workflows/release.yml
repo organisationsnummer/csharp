@@ -1,0 +1,22 @@
+name: Release
+on:
+  release:
+    types: [published]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up dotnet.
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0'
+      - name: Build
+        run: dotnet build --configuration Release Organisationsnummer -p:VersionPrefix=${{ github.event.release.tag_name }}
+      - name: Package
+        run: dotnet pack --configuration Release Organisationsnummer -p:VersionPrefix=${{ github.event.release.tag_name }}
+      - name: publish Nuget
+        run: dotnet nuget push Organisationsnummer/bin/Release/*.nupkg -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
+      - name: publish GH
+        run: dotnet nuget push Organisationsnummer/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}} -s https://nuget.pkg.github.com/Organisationsnummer/index.json

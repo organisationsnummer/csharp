@@ -16,11 +16,11 @@
         <PackageLicense>https://github.com/organisationsnummer/csharp/blob/master/LICENSE</PackageLicense>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Copyright>(C) 2020 Organisationsnummer &amp; Contributors</Copyright>
+        <Copyright>(C) Organisationsnummer &amp; Contributors</Copyright>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Version)' == '' ">
-        <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">3.0.0</VersionPrefix>
+        <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">1.0.0</VersionPrefix>
         <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
         <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     </PropertyGroup>
@@ -28,5 +28,4 @@
     <ItemGroup>
       <PackageReference Include="Personnummer" Version="3.1.1" />
     </ItemGroup>
-
 </Project>

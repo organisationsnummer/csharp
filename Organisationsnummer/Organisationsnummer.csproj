@@ -17,6 +17,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>(C) Organisationsnummer &amp; Contributors</Copyright>
+        <PackageIconUrl>https://raw.githubusercontent.com/organisationsnummer/csharp/master/icon.png</PackageIconUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Version)' == '' ">

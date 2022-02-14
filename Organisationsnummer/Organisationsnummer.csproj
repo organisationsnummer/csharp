@@ -17,8 +17,15 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>(C) Organisationsnummer &amp; Contributors</Copyright>
-        <PackageIconUrl>https://raw.githubusercontent.com/organisationsnummer/csharp/master/icon.png</PackageIconUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\"/>
+        <None Include="../icon.png" Pack="true" PackagePath="\"/>
+
+    </ItemGroup>
 
     <PropertyGroup Condition=" '$(Version)' == '' ">
         <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">1.0.0</VersionPrefix>

@@ -1,9 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6;netstandard2.1;net5</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+
+
+        <Company>Organisationsnummer</Company>
+        <Authors>Johannes Tegnér, Organisationsnummer Contributors</Authors>
+        <Description>Verify Swedish Organisation numbers.</Description>
+        <PackageProjectUrl>https://github.com/organisationsnummer/csharp</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/organisationsnummer/csharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>Validation, Organisation numbers, VAT, Swedish, Sweden, Verify</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicense>https://github.com/organisationsnummer/csharp/blob/master/LICENSE</PackageLicense>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>(C) 2020 Organisationsnummer &amp; Contributors</Copyright>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Version)' == '' ">
+        <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">3.0.0</VersionPrefix>
+        <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+        <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     </PropertyGroup>
 
     <ItemGroup>

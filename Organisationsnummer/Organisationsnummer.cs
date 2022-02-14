@@ -121,7 +121,7 @@ namespace Organisationsnummer
         public string Format(bool separator = true)
         {
             var num = ShortString;
-            return separator ? $"{num!.AsSpan(0, 6)}-{num!.AsSpan(6)}" : num!;
+            return separator ? $"{num!.Substring(0, 6)}-{num!.Substring(6)}" : num!;
         }
 
         private string ShortString => ((IsPersonnummer ? _personnummer!.Format(false) : _number)!)

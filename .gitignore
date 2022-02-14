@@ -1,4 +1,4 @@
 .vs/
 bin/
 obj/
-Personnummer.sln.DotSettings.user
+*.sln.DotSettings.user

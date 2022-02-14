@@ -1,6 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 using PerNr = Personnummer.Personnummer;
-using System;
 
 namespace Organisationsnummer
 {

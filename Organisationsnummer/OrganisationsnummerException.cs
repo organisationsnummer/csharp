@@ -1,4 +1,6 @@
-﻿namespace Organisationsnummer
+﻿using System;
+
+namespace Organisationsnummer
 {
     public class OrganisationsnummerException : Exception
     {

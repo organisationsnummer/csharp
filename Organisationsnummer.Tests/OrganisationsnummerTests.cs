@@ -41,7 +41,7 @@ public class OrganisationsnummerTests
     [InlineData("8510033999", "Enskild firma")]
     public void TestGetType(string input, string expected)
     {
-        Assert.Equal(expected, Organisationsnummer.Parse(input).Type);
+        Assert.Equal(expected, Organisationsnummer.Parse(input).GetType);
     }
 
     [Theory]
@@ -60,7 +60,7 @@ public class OrganisationsnummerTests
     public void TestWithPersonnummer(string input)
     {
         var nr = Organisationsnummer.Parse(input);
-        Assert.Equal("Enskild firma", nr.Type);
+        Assert.Equal("Enskild firma", nr.GetType);
         Assert.True(nr.IsPersonnummer);
     }
 }

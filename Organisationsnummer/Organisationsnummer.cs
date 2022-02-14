@@ -99,7 +99,7 @@ namespace Organisationsnummer
         /// <summary>
         /// Get type of company/firm.
         /// </summary>
-        public string Type =>
+        public string GetType =>
             IsPersonnummer
                 ? FirmaTypes[10]
                 : FirmaTypes[int.Parse(_number!.Substring(0, 1))];

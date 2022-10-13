@@ -19,7 +19,7 @@ Organisationsnummer.valid('202100-5489');
 //=> true
 ```
 
-See [Organisationsnummer.Tests/OrganisationsnummerTests.cs](Organisationsnummer.Tests/OrganisationsnummerTests.cs) for more examples.
+See [Organisationsnummer.Tests/OrganisationsnummerTests.cs](https://github.com/organisationsnummer/csharp/blob/master/Organisationsnummer.Tests/OrganisationsnummerTests.cs) for more examples.
 
 ## License
 

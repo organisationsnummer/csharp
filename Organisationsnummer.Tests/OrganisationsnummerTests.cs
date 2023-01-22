@@ -11,6 +11,7 @@ public class OrganisationsnummerTests
     [InlineData("556016-0681", false)]
     [InlineData("556103-4250", false)]
     [InlineData("5561034250", false)]
+    [InlineData("559244-0001", true)]
     public void TestValidateOrgNumbers(string number, bool expected)
     {
         Assert.Equal(expected, Organisationsnummer.Valid(number));

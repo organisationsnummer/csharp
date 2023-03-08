@@ -57,6 +57,20 @@ namespace Organisationsnummer
         /// <exception cref="OrganisationsnummerException">Thrown on parse error.</exception>
         public static Organisationsnummer Parse(string number) => new(number);
 
+        public static bool TryParse(string number, out Organisationsnummer? result)
+        {
+            try
+            {
+                result = new Organisationsnummer(number);
+                return true;
+            }
+            catch
+            {
+                result = null;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Validates a string as a organisationsnummer.
         /// </summary>
@@ -83,7 +97,7 @@ namespace Organisationsnummer
         /// <summary>
         /// Get organisation VAT.
         /// </summary>
-        public string VatNumber => @$"SE{ShortString}01";
+        public string VatNumber => $"SE{ShortString}01";
 
         /// <summary>
         /// Determine is the organisationsnummer is a personnummer or not.
@@ -146,9 +160,14 @@ namespace Organisationsnummer
                 var groups = matches[0].Groups;
 
                 // if [1] is set, it may only be prefixed with 16.
-                if (!string.IsNullOrEmpty(groups[1].Value) && int.Parse(groups[1].Value) != 16)
+                if (!string.IsNullOrEmpty(groups[1].Value))
                 {
-                    throw new OrganisationsnummerException();
+                    if (int.Parse(groups[1].Value) != 16)
+                    {
+                        throw new OrganisationsnummerException();
+                    }
+
+                    input = input.Substring(2);
                 }
 
                 // Third digit must be more than 20.

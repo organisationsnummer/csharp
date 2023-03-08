@@ -57,6 +57,12 @@ namespace Organisationsnummer
         /// <exception cref="OrganisationsnummerException">Thrown on parse error.</exception>
         public static Organisationsnummer Parse(string number) => new(number);
 
+        /// <summary>
+        /// Try parse a string to an organisationsnummer.
+        /// </summary>
+        /// <param name="number">Number to try parse.</param>
+        /// <param name="result">Resulting object.</param>
+        /// <returns>True on success else false.</returns>
         public static bool TryParse(string number, out Organisationsnummer? result)
         {
             try
@@ -145,6 +151,12 @@ namespace Organisationsnummer
 
         private void InnerParse(string input)
         {
+            if (input.Length is > 13 or < 10)
+            {
+                var state = input.Length > 13 ? "long" : "short";
+                throw new OrganisationsnummerException($"Input value too ${state}");
+            }
+
             try
             {
                 var matches = regex.Matches(input);

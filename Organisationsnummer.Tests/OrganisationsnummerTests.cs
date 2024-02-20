@@ -39,7 +39,8 @@ public class OrganisationsnummerTests
     public void TestFormatWithSeparator(OrganisationsnummerData input)
     {
         Assert.Equal(input.LongFormat, Organisationsnummer.Parse(input.LongFormat).Format(true));
-        Assert.Equal(input.LongFormat, Organisationsnummer.Parse(input.ShortFormat).Format(true));
+        // If short format in, we must presume it's not a + expected.
+        Assert.Equal(input.LongFormat.Replace('+', '-'), Organisationsnummer.Parse(input.ShortFormat).Format(true));
     }
 
     [Theory]

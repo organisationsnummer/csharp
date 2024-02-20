@@ -141,6 +141,11 @@ namespace Organisationsnummer
         /// <returns></returns>
         public string Format(bool separator = true)
         {
+            if (IsPersonnummer)
+            {
+                return _personnummer!.Format(false, !separator);
+            }
+
             var num = ShortString;
             return separator ? $"{num!.Substring(0, 6)}-{num!.Substring(6)}" : num!;
         }
@@ -151,6 +156,7 @@ namespace Organisationsnummer
 
         private void InnerParse(string input)
         {
+            var originalInput = input;
             if (input.Length is > 13 or < 10)
             {
                 var state = input.Length > 13 ? "long" : "short";
@@ -197,7 +203,7 @@ namespace Organisationsnummer
             {
                 try
                 {
-                    _personnummer = PerNr.Parse(input);
+                    _personnummer = PerNr.Parse(originalInput);
                 }
                 catch
                 {

@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net46;net47;net5.0;net6.0;net7.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0;netstandard2.1;net7.0;net47;net48</TargetFrameworks>
         <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
+        <LangVersion>default</LangVersion>
         <Company>Organisationsnummer</Company>
         <Authors>Johannes Tegnér, Organisationsnummer Contributors</Authors>
         <Description>Verify Swedish Organisation numbers.</Description>
@@ -33,6 +33,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Personnummer" Version="3.4.2" />
+      <PackageReference Include="Personnummer" Version="3.4.3" />
     </ItemGroup>
 </Project>

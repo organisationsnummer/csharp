@@ -3,23 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Organisationsnummer.Tests;
 
 public struct OrganisationsnummerData
 {
-    [JsonProperty("input")]
+    [JsonPropertyName("input")]
     public string Input { get; set; }
-    [JsonProperty("long_format")]
+    [JsonPropertyName("long_format")]
     public string LongFormat { get; set; }
-    [JsonProperty("short_format")]
+    [JsonPropertyName("short_format")]
     public string ShortFormat { get; set; }
-    [JsonProperty("valid")]
+    [JsonPropertyName("valid")]
     public bool Valid { get; set; }
-    [JsonProperty("type")]
+    [JsonPropertyName("type")]
     public string Type { get; set; }
-    [JsonProperty("vat_number")]
+    [JsonPropertyName("vat_number")]
     public string VatNumber { get; set; }
 }
 
@@ -47,7 +48,7 @@ public class DataProvider : IEnumerable<object[]>
     static DataProvider()
     {
         var response = WebClient.GetStringAsync("https://raw.githubusercontent.com/organisationsnummer/meta/main/testdata/list.json").Result;
-        Data = JsonConvert.DeserializeObject<List<OrganisationsnummerData>>(response)!;
+        Data = JsonSerializer.Deserialize<List<OrganisationsnummerData>>(response)!;
     }
 
     protected IEnumerable<object[]> AsObject(Func<OrganisationsnummerData, bool> filter) => Data.Where(filter).Select(o => new object[] { o });

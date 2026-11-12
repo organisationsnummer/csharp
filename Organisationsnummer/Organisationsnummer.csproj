@@ -12,7 +12,7 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>Validation, Organisation numbers, VAT, Swedish, Sweden, Verify</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicense>https://github.com/organisationsnummer/csharp/blob/master/LICENSE</PackageLicense>
+        <PackageLicense>https://github.com/organisationsnummer/csharp/blob/main/LICENSE</PackageLicense>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>(C) Organisationsnummer &amp; Contributors</Copyright>

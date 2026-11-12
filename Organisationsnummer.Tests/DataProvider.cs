@@ -47,7 +47,7 @@ public class DataProvider : IEnumerable<object[]>
 
     static DataProvider()
     {
-        var response = WebClient.GetStringAsync("https://raw.githubusercontent.com/organisationsnummer/meta/main/testdata/list.json").Result;
+        var response = WebClient.GetStringAsync("https://raw.githubusercontent.com/organisationsnummer/meta/HEAD/testdata/list.json").Result;
         Data = JsonSerializer.Deserialize<List<OrganisationsnummerData>>(response)!;
     }
 

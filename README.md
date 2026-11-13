@@ -15,7 +15,7 @@ dotnet add package Organisationsnummer
 ```c#
 using Organisationsnummer;
 
-Organisationsnummer.valid('202100-5489');
+Organisationsnummer.Valid("202100-5489");
 //=> true
 ```
 

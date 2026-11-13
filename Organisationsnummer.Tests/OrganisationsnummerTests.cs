@@ -68,6 +68,39 @@ public class OrganisationsnummerTests
         Assert.Equal("Enskild firma", nr.Type);
         Assert.True(nr.IsPersonnummer);
     }
+
+    [Theory]
+    // Fewer than 10 or more than 13 characters.
+    [InlineData("", "Input value too short")]
+    [InlineData("556016068", "Input value too short")]
+    [InlineData("16556016-06800", "Input value too long")]
+    // Right length, but not digits with an optional separator.
+    [InlineData("55601A-0680", "Input value has an invalid format")]
+    [InlineData("556016 0680", "Input value has an invalid format")]
+    [InlineData("1655601606800", "Input value has an invalid format")]
+    // Twelve digits where the first two are not 16.
+    [InlineData("185560160680", "Invalid century prefix, only 16 is allowed")]
+    [InlineData("18556016-0680", "Invalid century prefix, only 16 is allowed")]
+    // Digits three and four below 20.
+    [InlineData("551316-0680", "Invalid organization number, digits three and four must be 20 or higher")]
+    [InlineData("165513160680", "Invalid organization number, digits three and four must be 20 or higher")]
+    // First two digits below 10.
+    [InlineData("052016-0680", "Invalid organization number, the first two digits must be 10 or higher")]
+    [InlineData("160520160680", "Invalid organization number, the first two digits must be 10 or higher")]
+    // Wrong last digit.
+    [InlineData("556016-0681", "Invalid check digit")]
+    [InlineData("165560160681", "Invalid check digit")]
+    public void TestExceptionMessage(string input, string expected)
+    {
+        var ex = Assert.Throws<OrganisationsnummerException>(() => Organisationsnummer.Parse(input));
+        Assert.Equal(expected, ex.Message);
+    }
+
+    [Fact]
+    public void TestExceptionDefaultMessage()
+    {
+        Assert.Equal("Invalid Swedish organization number", new OrganisationsnummerException().Message);
+    }
 }
 
 

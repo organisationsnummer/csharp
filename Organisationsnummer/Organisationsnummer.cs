@@ -160,7 +160,7 @@ namespace Organisationsnummer
             if (input.Length is > 13 or < 10)
             {
                 var state = input.Length > 13 ? "long" : "short";
-                throw new OrganisationsnummerException($"Input value too ${state}");
+                throw new OrganisationsnummerException($"Input value too {state}");
             }
 
             try
@@ -168,7 +168,7 @@ namespace Organisationsnummer
                 var matches = regex.Matches(input);
                 if (matches.Count < 1 || matches[0].Groups.Count < 7)
                 {
-                    throw new OrganisationsnummerException();
+                    throw new OrganisationsnummerException("Input value has an invalid format");
                 }
 
                 input = input.Replace("-", "")
@@ -182,19 +182,29 @@ namespace Organisationsnummer
                 {
                     if (int.Parse(groups[1].Value) != 16)
                     {
-                        throw new OrganisationsnummerException();
+                        throw new OrganisationsnummerException("Invalid century prefix, only 16 is allowed");
                     }
 
                     input = input.Substring(2);
                 }
 
-                // Third digit must be more than 20.
-                // Second digit must be more than 10.
-                if (int.Parse(groups[3].Value) < 20 ||
-                    int.Parse(groups[2].Value) < 10 ||
-                    !LuhnCheck(input))
+                // Digits three and four must be 20 or higher.
+                if (int.Parse(groups[3].Value) < 20)
                 {
-                    throw new OrganisationsnummerException();
+                    throw new OrganisationsnummerException(
+                        "Invalid organization number, digits three and four must be 20 or higher");
+                }
+
+                // The first two digits must be 10 or higher.
+                if (int.Parse(groups[2].Value) < 10)
+                {
+                    throw new OrganisationsnummerException(
+                        "Invalid organization number, the first two digits must be 10 or higher");
+                }
+
+                if (!LuhnCheck(input))
+                {
+                    throw new OrganisationsnummerException("Invalid check digit");
                 }
 
                 _number = input;

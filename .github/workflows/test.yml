@@ -19,7 +19,8 @@ jobs:
       - name: Build
         run: dotnet build --framework net48
       - name: Run test suite
-        run: dotnet test --framework net48
+        # TreatNoTestsAsError fails the job when no tests are discovered.
+        run: dotnet test --framework net48 -- RunConfiguration.TreatNoTestsAsError=true
   test-net:
     strategy:
       matrix:
@@ -38,7 +39,8 @@ jobs:
       - name: Build
         run: dotnet build --framework net${{ matrix.version }}
       - name: Run test suite
-        run: dotnet test --framework net${{ matrix.version }}
+        # TreatNoTestsAsError fails the job when no tests are discovered.
+        run: dotnet test --framework net${{ matrix.version }} -- RunConfiguration.TreatNoTestsAsError=true
 
   # Single stable check for branch protection, so the ruleset does not need
   # to change when the matrix does.
